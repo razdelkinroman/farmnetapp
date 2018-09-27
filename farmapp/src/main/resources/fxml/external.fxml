@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane cacheHint="SCALE_AND_ROTATE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <SplitPane dividerPositions="0.5" layoutX="1.0" layoutY="332.0" orientation="VERTICAL" prefHeight="4.0" prefWidth="800.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="139.0" prefWidth="498.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+            </items>
+        </SplitPane>
+        <TableView id="table" fx:id="table" layoutX="243.0" layoutY="120.0" prefHeight="492.0" prefWidth="800.0" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columns>
+                <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
+                <TableColumn id="name" fx:id="name" prefWidth="284.0" text="Название товара" />
+                <TableColumn fx:id="price" minWidth="0.0" prefWidth="188.0" text="Цена" />
+                <TableColumn fx:id="balance" minWidth="0.0" prefWidth="327.0" text="Количество на складе" />
+            </columns>
+        </TableView>
+        <AnchorPane layoutX="36.0" layoutY="508.0" prefHeight="92.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <TextField id="price" fx:id="priceInput" layoutX="236.0" layoutY="13.0" promptText="Цена" />
+                <TextField id="name" fx:id="nameInput" layoutX="14.0" layoutY="13.0" promptText="Название товара" />
+                <TextField id="balance" fx:id="balanceInput" layoutX="438.0" layoutY="13.0" promptText="Количество" />
+                <Button id="submit" fx:id="submit" layoutX="614.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Добавить" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
+
