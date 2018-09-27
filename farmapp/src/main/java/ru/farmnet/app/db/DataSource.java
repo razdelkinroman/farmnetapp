@@ -5,28 +5,49 @@ import ru.farmnet.app.exception.AppException;
 
 import java.beans.PropertyVetoException;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
+
 
 /**
  * Подключение к firebird
  */
 public class DataSource {
 
-    static final String JDBC_DRIVER = "org.firebirdsql.jdbc.FBDriver";
-    static final String DB_URL = "jdbc:firebirdsql:localhost/3050:";
-    static final String USER = "SYSDBA";
-    static final String PASSWORD = "masterkey";
+    String jdbcDriver;
+    String dbUrl;
+    String user;
+    String password;
+
+
+    Properties prop = new Properties();
+
+    {
+        try (InputStream input = DataSource.class.getClassLoader().getResourceAsStream("config.properties")) {
+            prop.load(input);
+            dbUrl = prop.getProperty("dbUrl");
+            user =  prop.getProperty("user");
+            password =  prop.getProperty("password");
+            jdbcDriver = prop.getProperty("jdbcDriver");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     private static DataSource dataSource;
     private ComboPooledDataSource comboPooledDataSource;
 
     private DataSource() throws AppException {
         try {
             comboPooledDataSource = new ComboPooledDataSource();
-            comboPooledDataSource.setDriverClass(JDBC_DRIVER);
+            comboPooledDataSource.setDriverClass(jdbcDriver);
             comboPooledDataSource.setJdbcUrl(getURL());
-            comboPooledDataSource.setUser(USER);
-            comboPooledDataSource.setPassword(PASSWORD);
+            comboPooledDataSource.setUser(user);
+            comboPooledDataSource.setPassword(password);
         } catch (PropertyVetoException ex1) {
             throw new AppException("Error crate datasource");
         }
@@ -42,10 +63,18 @@ public class DataSource {
     private String getURL() {
         String abspath = new File("resources/bd/FAR.FDB").getAbsolutePath().replace("\\", "/");
         String path = new File("resources/bd/FAR.FDB").getPath().replace("\\", "/");
-        return DB_URL + abspath.substring(0, abspath.indexOf(path)) + "farmapp/src/main/" + path;
+        return dbUrl + abspath.substring(0, abspath.indexOf(path)) + "farmapp/src/main/" + path;
     }
 
     public Connection getConnection() throws SQLException {
         return comboPooledDataSource.getConnection();
     }
+
+
 }
+
+
+
+
+
+
