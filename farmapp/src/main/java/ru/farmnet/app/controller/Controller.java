@@ -49,7 +49,7 @@ public class Controller {
                     Dialog.showAlertWithHeaderText("No updates found");
                 }
             } catch (AppException e) {
-                Dialog.showErrorDialog(e);
+                Dialog.showErrorDialog(e.getMessage());
             }
         }
     }

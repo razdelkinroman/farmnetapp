@@ -12,11 +12,11 @@ public class Dialog {
         alert.showAndWait();
     }
 
-    public static void showErrorDialog(Throwable e) {
+    public static void showErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
-        alert.setContentText(e.getMessage());
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

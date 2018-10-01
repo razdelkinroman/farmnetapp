@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import ru.farmnet.app.exception.AppException;
 import ru.farmnet.app.fxcomponent.Dialog;
 
+import java.io.IOException;
+
 
 public class MainApp extends Application {
 
@@ -39,8 +41,8 @@ public class MainApp extends Application {
             stage.setScene(new Scene(root));
             stage.show();
             loadServerLib();
-        } catch (Exception e) {
-            Dialog.showErrorDialog(e);
+        } catch (IOException e) {
+            Dialog.showErrorDialog(e.getMessage());
         }
     }
 
