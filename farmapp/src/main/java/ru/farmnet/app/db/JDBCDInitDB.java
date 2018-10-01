@@ -25,7 +25,7 @@ public class JDBCDInitDB implements InitDB {
      */
     @Override
     public void init() throws AppException {
-        try (Connection conn = DataSource.getInstance().getConnection();
+        try (Connection conn = DataSource.getConnection();
              Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(SQL_CREATE_TABLE);
         } catch (SQLException se) {

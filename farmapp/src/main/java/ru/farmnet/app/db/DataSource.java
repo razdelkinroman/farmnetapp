@@ -7,6 +7,8 @@ import java.beans.PropertyVetoException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 
@@ -36,7 +38,7 @@ public class DataSource {
 
     private static ComboPooledDataSource dataSource;
 
-    public static ComboPooledDataSource getInstance() throws AppException {
+    private static ComboPooledDataSource getInstance() throws AppException {
         if (dataSource == null) {
             try {
                 dataSource = new ComboPooledDataSource();
@@ -55,6 +57,9 @@ public class DataSource {
         String abspath = new File("resources/bd/FAR.FDB").getAbsolutePath().replace("\\", "/");
         String path = new File("resources/bd/FAR.FDB").getPath().replace("\\", "/");
         return dbUrl + abspath.substring(0, abspath.indexOf(path)) + "farmapp/src/main/" + path;
+    }
+    public static Connection getConnection() throws AppException, SQLException {
+        return getInstance().getConnection();
     }
 }
 

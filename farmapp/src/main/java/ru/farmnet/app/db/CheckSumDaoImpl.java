@@ -16,7 +16,7 @@ public class CheckSumDaoImpl implements CheckSumDao {
     @Override
     public String getCheckSum() throws SQLException, AppException {
         String checkSum = "";
-        try (Connection conn = DataSource.getInstance().getConnection();
+        try (Connection conn = DataSource.getConnection();
              Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(GET_CHECKSUM);
             while (rs.next()) {
@@ -29,7 +29,7 @@ public class CheckSumDaoImpl implements CheckSumDao {
 
     @Override
     public void updateCheckSum(String checkSum) throws SQLException, AppException {
-        try (Connection conn = DataSource.getInstance().getConnection()) {
+        try (Connection conn = DataSource.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(UPDATE_CHECKSUM);
             stmt.setString(1, checkSum);
             stmt.executeUpdate();
